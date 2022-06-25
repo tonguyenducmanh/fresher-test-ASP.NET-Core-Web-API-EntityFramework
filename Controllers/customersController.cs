@@ -21,15 +21,20 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         }
 
         // GET: api/customers
-        [HttpGet]
+        [HttpGet()]
         [Route("/")]
-        public async Task<ActionResult<IEnumerable<customer>>> Getcustomer()
+
+        public async Task<ActionResult> Getcustomer()
         {
-          if (_context.customer == null)
+          if (_context.history == null)
           {
               return NotFound();
           }
-            return await _context.customer.ToListAsync();
+            //var queryText = from m in _context.history
+            //                select m;
+            var queryText = from m in _context.customer
+                            select m;
+            return Ok(await queryText.ToListAsync());
         }
 
         
