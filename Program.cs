@@ -9,8 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-builder.Services.AddDbContext<SachContext>(
-    DbContextOptions => DbContextOptions.UseMySql(builder.Configuration.GetConnectionString("SachConnectionString")
+builder.Services.AddDbContext<customerDatabaseContext>(
+    DbContextOptions => DbContextOptions.UseMySql(builder.Configuration.GetConnectionString("CustomerConnectionString")
                 , serverVersion));
 var app = builder.Build();
 
