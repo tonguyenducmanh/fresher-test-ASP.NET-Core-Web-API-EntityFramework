@@ -140,7 +140,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                     b.Property<string>("historyId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("customer_id")
+                    b.Property<string>("customerId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("historyContent")
@@ -149,7 +150,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
                     b.HasKey("historyId");
 
-                    b.HasIndex("customer_id");
+                    b.HasIndex("customerId");
 
                     b.ToTable("history");
                 });
@@ -159,7 +160,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                     b.Property<string>("loaitiemnangId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("customer_id")
+                    b.Property<string>("customerId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("loaitiemnangContent")
@@ -168,7 +170,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
                     b.HasKey("loaitiemnangId");
 
-                    b.HasIndex("customer_id");
+                    b.HasIndex("customerId");
 
                     b.ToTable("loaitiemnang");
                 });
@@ -178,7 +180,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                     b.Property<string>("theId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("customer_id")
+                    b.Property<string>("customerId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("theContent")
@@ -187,7 +190,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
                     b.HasKey("theId");
 
-                    b.HasIndex("customer_id");
+                    b.HasIndex("customerId");
 
                     b.ToTable("the");
                 });
@@ -196,7 +199,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 {
                     b.HasOne("fresher_test_ASP.NET_Core_Web_API.Models.customer", "customer")
                         .WithMany("history")
-                        .HasForeignKey("customer_id");
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("customer");
                 });
@@ -205,7 +210,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 {
                     b.HasOne("fresher_test_ASP.NET_Core_Web_API.Models.customer", "customer")
                         .WithMany("loaitiemnang")
-                        .HasForeignKey("customer_id");
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("customer");
                 });
@@ -214,7 +221,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 {
                     b.HasOne("fresher_test_ASP.NET_Core_Web_API.Models.customer", "customer")
                         .WithMany("the")
-                        .HasForeignKey("customer_id");
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("customer");
                 });

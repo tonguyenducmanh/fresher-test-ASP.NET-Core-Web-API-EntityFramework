@@ -4,7 +4,7 @@
 
 namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 {
-    public partial class initialdatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,17 +85,18 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     historyContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    customer_id = table.Column<string>(type: "varchar(255)", nullable: true)
+                    customerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_history", x => x.historyId);
                     table.ForeignKey(
-                        name: "FK_history_customer_customer_id",
-                        column: x => x.customer_id,
+                        name: "FK_history_customer_customerId",
+                        column: x => x.customerId,
                         principalTable: "customer",
-                        principalColumn: "_id");
+                        principalColumn: "_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -107,17 +108,18 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     loaitiemnangContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    customer_id = table.Column<string>(type: "varchar(255)", nullable: true)
+                    customerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_loaitiemnang", x => x.loaitiemnangId);
                     table.ForeignKey(
-                        name: "FK_loaitiemnang_customer_customer_id",
-                        column: x => x.customer_id,
+                        name: "FK_loaitiemnang_customer_customerId",
+                        column: x => x.customerId,
                         principalTable: "customer",
-                        principalColumn: "_id");
+                        principalColumn: "_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -129,34 +131,35 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     theContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    customer_id = table.Column<string>(type: "varchar(255)", nullable: true)
+                    customerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_the", x => x.theId);
                     table.ForeignKey(
-                        name: "FK_the_customer_customer_id",
-                        column: x => x.customer_id,
+                        name: "FK_the_customer_customerId",
+                        column: x => x.customerId,
                         principalTable: "customer",
-                        principalColumn: "_id");
+                        principalColumn: "_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_history_customer_id",
+                name: "IX_history_customerId",
                 table: "history",
-                column: "customer_id");
+                column: "customerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_loaitiemnang_customer_id",
+                name: "IX_loaitiemnang_customerId",
                 table: "loaitiemnang",
-                column: "customer_id");
+                column: "customerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_the_customer_id",
+                name: "IX_the_customerId",
                 table: "the",
-                column: "customer_id");
+                column: "customerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
