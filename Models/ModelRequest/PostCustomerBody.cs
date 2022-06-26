@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace fresher_test_ASP.NET_Core_Web_API.Models
+﻿namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
 {
-    [Table("customer")]
-    public class customer
+    public class PostCustomerBody
     {
-        [Key]
-        public string _id { get; set; } = default!;
+        public string id { get; set; } = default!;
         public string anh { get; set; } = default!;
         public string xungho { get; set; } = default!;
         public string hovadem { get; set; } = default!;
@@ -15,8 +10,6 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
         public string phongban { get; set; } = default!;
         public string dtdidong { get; set; } = default!;
         public string dtcoquan { get; set; } = default!;
-        public ICollection<loaitiemnang> loaitiemnang { get; set; } = default!;
-        public ICollection<the> the { get; set; } = default!;
         public string nguongoc { get; set; } = default!;
         public string zalo { get; set; } = default!;
         public string emailcanhan { get; set; } = default!;
@@ -37,6 +30,11 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
         public string sonha { get; set; } = default!;
         public string mota { get; set; } = default!;
         public bool dungchung { get; set; } = default!;
-        public ICollection<history> history { get; set; } = default!;
+        public string loaitiemnangId { get; set; } = default!;
+        public string loaitiemnangContent { get; set; } = default!;
+        public string theId { get; set; } = default!;
+        public string theContent { get; set; } = default!;
+        public string historyId { get; set; } = default!;
+        public string historyContent { get; set; } = default!;
     }
 }
