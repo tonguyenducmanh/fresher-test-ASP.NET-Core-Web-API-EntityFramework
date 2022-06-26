@@ -10,7 +10,7 @@ using fresher_test_ASP.NET_Core_Web_API.Models;
 namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 {
     [DbContext(typeof(customerDatabaseContext))]
-    [Migration("20220625123148_initial-database")]
+    [Migration("20220626030749_initial-database")]
     partial class initialdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
