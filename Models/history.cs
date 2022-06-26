@@ -7,8 +7,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
     public class history
     {
         [Key]
-        public string historyId { get; set; }
-        public string historyContent { get; set; }
-        public customer customer { get; set; }
+        public string historyId { get; set; } = default!;
+        public string historyContent { get; set; } = default!;
+        [ForeignKey("customer")]
+        public string customerId { get; set; } = default!;
+        public customer customer { get; set; } = default!;
     }
 }
