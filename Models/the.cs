@@ -7,10 +7,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
     public class the
     {
         [Key]
-        public string theId { get; set; } = default!;
-        public string theContent { get; set; } = default!;
+        public string theId { get; set; }
+        public string theContent { get; set; }
         [ForeignKey("customer")]
-        public string customerId { get; set; } = default!;
-        public customer customer { get; set; } = default!;
+        public string customerId { get; set; }
+        public customer customer { get; set; }
     }
 }

@@ -10,7 +10,6 @@ using fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest;
 
 namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 {
-    [Route("/")]
     [ApiController]
     public class customersController : ControllerBase
     {
@@ -21,16 +20,16 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             _context = context;
         }
 
-        // POST: /all (tải danh sách cơ sở dữ liệu theo dạng json, có điều kiện tìm kiếm)
+        // POST: /customers/all (tải danh sách cơ sở dữ liệu theo dạng json, có điều kiện tìm kiếm)
         [HttpPost()]
-        [Route("/all")]
+        [Route("/customers/all")]
 
         public async Task<ActionResult> PostFetchCustomer()
         {
             if (_context.customer == null)
             {
                 return NotFound();
-            }/**/
+            }
             var queryText = _context.customer.Select(t => new
             {
                 _id = t._id,
@@ -70,9 +69,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         }
 
 
-        // POST: / (thêm bản ghi vào các cơ sở dữ liệu)
+        // POST: /customers (thêm bản ghi vào các cơ sở dữ liệu)
         [HttpPost()]
-        [Route("/")]
+        [Route("/customers")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult> PostCreateCustomer(
             [FromForm] PostCustomerBody PostCustomerBody
@@ -142,9 +141,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             return Ok();
         }
 
-        // PUT:/edit chỉnh sửa ở mức cơ bản, yêu cầu phải trùng id của tất cả các cơ sở dữ liệu
+        // PUT:/customers/edit chỉnh sửa ở mức cơ bản, yêu cầu phải trùng id của tất cả các cơ sở dữ liệu
         [HttpPut()]
-        [Route("/edit")]
+        [Route("/customers/edit")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult> PutEditCustomer(
             [FromForm] PostCustomerBody PostCustomerBody
@@ -214,16 +213,16 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             return Ok();
         }
 
-        // POST :/delete xóa nhiều bản ghi
+        // POST : /customers/delete xóa nhiều bản ghi
         [HttpPost()]
-        [Route("/delete")]
+        [Route("/customers/delete")]
         public async Task<ActionResult> PostDeleteCustomer(string[] id)
         {
             if (_context.customer == null)
             {
                 return NotFound();
             }
-            foreach(string id2 in id)
+            foreach (string id2 in id)
             {
                 var deleteCustomer = await _context.customer.FindAsync(id2);
                 if (deleteCustomer == null)
