@@ -69,6 +69,29 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         }
 
 
+        // GET : /customers/last tải bản ghi cuối cùng
+        [HttpGet()]
+        [Route("/customers/last")]
+        public async Task<ActionResult> GetLastCutomer()
+        {
+            return Ok();
+        }
+        // POST : /customers/find tìm người dùng
+        [HttpPost()]
+        [Route("/customers/find")]
+        public async Task<ActionResult> PostFindCutomer()
+        {
+            return Ok();
+        }
+
+        // GET : /customers/check check người dùng
+        [HttpGet()]
+        [Route("/customers/check")]
+        public async Task<ActionResult> GetCheckCutomer()
+        {
+            return Ok();
+        }
+
         // POST: /customers (thêm bản ghi vào các cơ sở dữ liệu)
         [HttpPost()]
         [Route("/customers")]
@@ -237,5 +260,12 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             return NoContent();
         }
 
+        // POST : /customers/count đếm lượng người dùng
+        [HttpPost()]
+        [Route("/customers/count")]
+        public async Task<ActionResult> PostCountCutomer()
+        {
+            return Ok();
+        }
     }
 }
