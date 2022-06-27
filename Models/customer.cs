@@ -7,36 +7,36 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
     public class customer
     {
         [Key]
-        public string _id { get; set; } = default!;
-        public string anh { get; set; } = default!;
-        public string xungho { get; set; } = default!;
-        public string hovadem { get; set; } = default!;
-        public string ten { get; set; } = default!;
-        public string phongban { get; set; } = default!;
-        public string dtdidong { get; set; } = default!;
-        public string dtcoquan { get; set; } = default!;
-        public ICollection<loaitiemnang> loaitiemnang { get; set; } = default!;
-        public ICollection<the> the { get; set; } = default!;
-        public string nguongoc { get; set; } = default!;
-        public string zalo { get; set; } = default!;
-        public string emailcanhan { get; set; } = default!;
-        public string emailcoquan { get; set; } = default!;
-        public string tochuc { get; set; } = default!;
-        public string masothue { get; set; } = default!;
-        public string taikhoannganhang { get; set; } = default!;
-        public string motainganhang { get; set; } = default!;
-        public string ngaythanhlap { get; set; } = default!;
-        public string loaihinh { get; set; } = default!;
-        public string linhvuc { get; set; } = default!;
-        public string nganhnghe { get; set; } = default!;
-        public string doanhthu { get; set; } = default!;
-        public string quocgia { get; set; } = default!;
-        public string tinhthanhpho { get; set; } = default!;
-        public string quanhuyen { get; set; } = default!;
-        public string phuongxa { get; set; } = default!;
-        public string sonha { get; set; } = default!;
-        public string mota { get; set; } = default!;
-        public bool dungchung { get; set; } = default!;
-        public ICollection<history> history { get; set; } = default!;
+        public string _id { get; set; }
+        public string anh { get; set; }
+        public string xungho { get; set; }
+        public string hovadem { get; set; }
+        public string ten { get; set; }
+        public string phongban { get; set; }
+        public string dtdidong { get; set; }
+        public string dtcoquan { get; set; }
+        public ICollection<loaitiemnang> loaitiemnang { get; set; }
+        public ICollection<the> the { get; set; }
+        public string nguongoc { get; set; }
+        public string zalo { get; set; }
+        public string emailcanhan { get; set; }
+        public string emailcoquan { get; set; }
+        public string tochuc { get; set; }
+        public string masothue { get; set; }
+        public string taikhoannganhang { get; set; }
+        public string motainganhang { get; set; }
+        public string ngaythanhlap { get; set; }
+        public string loaihinh { get; set; }
+        public string linhvuc { get; set; }
+        public string nganhnghe { get; set; }
+        public string doanhthu { get; set; }
+        public string quocgia { get; set; }
+        public string tinhthanhpho { get; set; }
+        public string quanhuyen { get; set; }
+        public string phuongxa { get; set; }
+        public string sonha { get; set; }
+        public string mota { get; set; }
+        public bool dungchung { get; set; }
+        public ICollection<history> history { get; set; }
     }
 }
