@@ -31,8 +31,8 @@
         public string soNha { get; set; } = default!;
         public string moTa { get; set; } = default!;
         public bool dungChung { get; set; } = default!;
-        public string loaiTiemNang { get; set; } = default!;
-        public string the { get; set; } = default!;
-        public string history { get; set; } = default!;
+        public string[] loaiTiemNang { get; set; } = default!;
+        public string[] the { get; set; } = default!;
+        public string[] history { get; set; } = default!;
     }
 }
