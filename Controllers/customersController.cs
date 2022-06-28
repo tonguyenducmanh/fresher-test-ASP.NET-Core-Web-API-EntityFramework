@@ -38,6 +38,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 hovadem = t.hovadem,
                 ten = t.ten,
                 phongban = t.phongban,
+                chucdanh = t.chucdanh,
                 dtdidong = t.dtdidong,
                 dtcoquan = t.dtcoquan,
                 loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
@@ -108,52 +109,53 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 
             customer newCustomer = new()
             {
-                _id = PostCustomerBody.id,
+                _id = PostCustomerBody._id,
                 anh = PostCustomerBody.anh,
-                xungho = PostCustomerBody.xungho,
-                hovadem = PostCustomerBody.hovadem,
+                xungho = PostCustomerBody.xungHo,
+                hovadem = PostCustomerBody.hoVaDem,
                 ten = PostCustomerBody.ten,
-                phongban = PostCustomerBody.phongban,
-                dtdidong = PostCustomerBody.dtdidong,
-                dtcoquan = PostCustomerBody.dtcoquan,
-                nguongoc = PostCustomerBody.nguongoc,
+                phongban = PostCustomerBody.phongBan,
+                chucdanh = PostCustomerBody.chucDanh,
+                dtdidong = PostCustomerBody.dienThoaiDiDong,
+                dtcoquan = PostCustomerBody.dienThoaiCoQuan,
+                nguongoc = PostCustomerBody.nguonGoc,
                 zalo = PostCustomerBody.zalo,
-                emailcanhan = PostCustomerBody.emailcanhan,
-                emailcoquan = PostCustomerBody.emailcoquan,
-                tochuc = PostCustomerBody.tochuc,
-                masothue = PostCustomerBody.masothue,
-                taikhoannganhang = PostCustomerBody.taikhoannganhang,
-                motainganhang = PostCustomerBody.motainganhang,
-                ngaythanhlap = PostCustomerBody.ngaythanhlap,
-                loaihinh = PostCustomerBody.loaihinh,
-                linhvuc = PostCustomerBody.linhvuc,
-                nganhnghe = PostCustomerBody.nganhnghe,
-                doanhthu = PostCustomerBody.doanhthu,
-                quocgia = PostCustomerBody.quocgia,
-                tinhthanhpho = PostCustomerBody.tinhthanhpho,
-                quanhuyen = PostCustomerBody.quanhuyen,
-                phuongxa = PostCustomerBody.phuongxa,
-                sonha = PostCustomerBody.sonha,
-                mota = PostCustomerBody.mota,
-                dungchung = PostCustomerBody.dungchung,
+                emailcanhan = PostCustomerBody.emailCaNhan,
+                emailcoquan = PostCustomerBody.emailCoQuan,
+                tochuc = PostCustomerBody.toChuc,
+                masothue = PostCustomerBody.maSoThue,
+                taikhoannganhang = PostCustomerBody.taiKhoanNganHang,
+                motainganhang = PostCustomerBody.moTaiNganHang,
+                ngaythanhlap = PostCustomerBody.ngayThanhLap,
+                loaihinh = PostCustomerBody.loaiHinh,
+                linhvuc = PostCustomerBody.linhVuc,
+                nganhnghe = PostCustomerBody.nganhNghe,
+                doanhthu = PostCustomerBody.doanhThu,
+                quocgia = PostCustomerBody.quocGia,
+                tinhthanhpho = PostCustomerBody.tinhThanh,
+                quanhuyen = PostCustomerBody.quanHuyen,
+                phuongxa = PostCustomerBody.phuongXa,
+                sonha = PostCustomerBody.soNha,
+                mota = PostCustomerBody.moTa,
+                dungchung = PostCustomerBody.dungChung,
             };
 
             loaitiemnang newLoaitiemnang = new()
             {
-                loaitiemnangId = PostCustomerBody.loaitiemnangId,
-                loaitiemnangContent = PostCustomerBody.loaitiemnangContent,
+                loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
+                loaitiemnangContent = PostCustomerBody.loaiTiemNang,
                 customerId = newCustomer._id
             };
             the newThe = new()
             {
-                theId = PostCustomerBody.theId,
-                theContent = PostCustomerBody.theContent,
+                theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
+                theContent = PostCustomerBody.the,
                 customerId = newCustomer._id
             };
             history newHistory = new()
             {
-                historyId = PostCustomerBody.historyId,
-                historyContent = PostCustomerBody.historyContent,
+                historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
+                historyContent = PostCustomerBody.history,
                 customerId = newCustomer._id
             };
             _context.customer.Add(newCustomer);
@@ -180,52 +182,53 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 
             customer newCustomer = new()
             {
-                _id = PostCustomerBody.id,
+                _id = PostCustomerBody._id,
                 anh = PostCustomerBody.anh,
-                xungho = PostCustomerBody.xungho,
-                hovadem = PostCustomerBody.hovadem,
+                xungho = PostCustomerBody.xungHo,
+                hovadem = PostCustomerBody.hoVaDem,
                 ten = PostCustomerBody.ten,
-                phongban = PostCustomerBody.phongban,
-                dtdidong = PostCustomerBody.dtdidong,
-                dtcoquan = PostCustomerBody.dtcoquan,
-                nguongoc = PostCustomerBody.nguongoc,
+                phongban = PostCustomerBody.phongBan,
+                chucdanh = PostCustomerBody.chucDanh,
+                dtdidong = PostCustomerBody.dienThoaiDiDong,
+                dtcoquan = PostCustomerBody.dienThoaiCoQuan,
+                nguongoc = PostCustomerBody.nguonGoc,
                 zalo = PostCustomerBody.zalo,
-                emailcanhan = PostCustomerBody.emailcanhan,
-                emailcoquan = PostCustomerBody.emailcoquan,
-                tochuc = PostCustomerBody.tochuc,
-                masothue = PostCustomerBody.masothue,
-                taikhoannganhang = PostCustomerBody.taikhoannganhang,
-                motainganhang = PostCustomerBody.motainganhang,
-                ngaythanhlap = PostCustomerBody.ngaythanhlap,
-                loaihinh = PostCustomerBody.loaihinh,
-                linhvuc = PostCustomerBody.linhvuc,
-                nganhnghe = PostCustomerBody.nganhnghe,
-                doanhthu = PostCustomerBody.doanhthu,
-                quocgia = PostCustomerBody.quocgia,
-                tinhthanhpho = PostCustomerBody.tinhthanhpho,
-                quanhuyen = PostCustomerBody.quanhuyen,
-                phuongxa = PostCustomerBody.phuongxa,
-                sonha = PostCustomerBody.sonha,
-                mota = PostCustomerBody.mota,
-                dungchung = PostCustomerBody.dungchung,
+                emailcanhan = PostCustomerBody.emailCaNhan,
+                emailcoquan = PostCustomerBody.emailCoQuan,
+                tochuc = PostCustomerBody.toChuc,
+                masothue = PostCustomerBody.maSoThue,
+                taikhoannganhang = PostCustomerBody.taiKhoanNganHang,
+                motainganhang = PostCustomerBody.moTaiNganHang,
+                ngaythanhlap = PostCustomerBody.ngayThanhLap,
+                loaihinh = PostCustomerBody.loaiHinh,
+                linhvuc = PostCustomerBody.linhVuc,
+                nganhnghe = PostCustomerBody.nganhNghe,
+                doanhthu = PostCustomerBody.doanhThu,
+                quocgia = PostCustomerBody.quocGia,
+                tinhthanhpho = PostCustomerBody.tinhThanh,
+                quanhuyen = PostCustomerBody.quanHuyen,
+                phuongxa = PostCustomerBody.phuongXa,
+                sonha = PostCustomerBody.soNha,
+                mota = PostCustomerBody.moTa,
+                dungchung = PostCustomerBody.dungChung,
             };
 
             loaitiemnang newLoaitiemnang = new()
             {
-                loaitiemnangId = PostCustomerBody.loaitiemnangId,
-                loaitiemnangContent = PostCustomerBody.loaitiemnangContent,
+                loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
+                loaitiemnangContent = PostCustomerBody.loaiTiemNang,
                 customerId = newCustomer._id
             };
             the newThe = new()
             {
-                theId = PostCustomerBody.theId,
-                theContent = PostCustomerBody.theContent,
+                theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
+                theContent = PostCustomerBody.the,
                 customerId = newCustomer._id
             };
             history newHistory = new()
             {
-                historyId = PostCustomerBody.historyId,
-                historyContent = PostCustomerBody.historyContent,
+                historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
+                historyContent = PostCustomerBody.history,
                 customerId = newCustomer._id
             };
             _context.customer.Update(newCustomer);

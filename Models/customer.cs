@@ -13,6 +13,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
         public string hovadem { get; set; }
         public string ten { get; set; }
         public string phongban { get; set; }
+        public string chucdanh { get; set; }
         public string dtdidong { get; set; }
         public string dtcoquan { get; set; }
         public ICollection<loaitiemnang> loaitiemnang { get; set; }

@@ -10,7 +10,7 @@ using fresher_test_ASP.NET_Core_Web_API.Models;
 namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 {
     [DbContext(typeof(customerDatabaseContext))]
-    [Migration("20220627160254_initial")]
+    [Migration("20220628000042_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("anh")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("chucdanh")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -403,8 +407,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.history", b =>
                 {
-                    b.Property<string>("historyId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("historyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
@@ -423,8 +428,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.loaitiemnang", b =>
                 {
-                    b.Property<string>("loaitiemnangId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("loaitiemnangId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
@@ -443,8 +449,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.the", b =>
                 {
-                    b.Property<string>("theId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("theId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
