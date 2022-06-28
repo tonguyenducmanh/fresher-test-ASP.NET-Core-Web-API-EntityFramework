@@ -28,6 +28,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     phongban = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    chucdanh = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     dtdidong = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     dtcoquan = table.Column<string>(type: "longtext", nullable: false)
@@ -97,8 +99,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 name: "history",
                 columns: table => new
                 {
-                    historyId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    historyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     historyContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     customerId = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -120,8 +122,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 name: "loaitiemnang",
                 columns: table => new
                 {
-                    loaitiemnangId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    loaitiemnangId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     loaitiemnangContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     customerId = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -143,8 +145,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 name: "the",
                 columns: table => new
                 {
-                    theId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    theId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     theContent = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     customerId = table.Column<string>(type: "varchar(255)", nullable: false)

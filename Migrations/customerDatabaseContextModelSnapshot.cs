@@ -27,6 +27,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("chucdanh")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("doanhthu")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -401,8 +405,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.history", b =>
                 {
-                    b.Property<string>("historyId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("historyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
@@ -421,8 +426,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.loaitiemnang", b =>
                 {
-                    b.Property<string>("loaitiemnangId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("loaitiemnangId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
@@ -441,8 +447,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 
             modelBuilder.Entity("fresher_test_ASP.NET_Core_Web_API.Models.the", b =>
                 {
-                    b.Property<string>("theId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("theId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
