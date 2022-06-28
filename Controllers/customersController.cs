@@ -23,48 +23,56 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         // POST: /customers/all (tải danh sách cơ sở dữ liệu theo dạng json, có điều kiện tìm kiếm)
         [HttpPost()]
         [Route("/customers/all")]
+        [Consumes("multipart/form-data")]
 
-        public async Task<ActionResult> PostFetchCustomer()
+
+        public async Task<ActionResult> PostFetchCustomer(
+            [FromForm] PostSearchAndFilter PostSearchAndFilter
+            )
         {
             if (_context.customer == null)
             {
                 return NotFound();
             }
-            var queryText = _context.customer.Select(t => new
-            {
-                _id = t._id,
-                anh = t.anh,
-                xungho = t.xungho,
-                hovadem = t.hovadem,
-                ten = t.ten,
-                phongban = t.phongban,
-                chucdanh = t.chucdanh,
-                dtdidong = t.dtdidong,
-                dtcoquan = t.dtcoquan,
-                loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                the = t.the.Select(p => p.theContent),
-                nguongoc = t.nguongoc,
-                zalo = t.zalo,
-                emailcanhan = t.emailcanhan,
-                emailcoquan = t.emailcoquan,
-                tochuc = t.tochuc,
-                masothue = t.masothue,
-                taikhoannganhang = t.taikhoannganhang,
-                motainganhang = t.motainganhang,
-                ngaythanhlap = t.ngaythanhlap,
-                loaihinh = t.loaihinh,
-                linhvuc = t.linhvuc,
-                nganhnghe = t.nganhnghe,
-                doanhthu = t.doanhthu,
-                quocgia = t.quocgia,
-                tinhthanhpho = t.tinhthanhpho,
-                quanhuyen = t.quanhuyen,
-                phuongxa = t.phuongxa,
-                sonha = t.sonha,
-                mota = t.mota,
-                dungchung = t.dungchung,
-                history = t.history.Select(u => u.historyContent)
-            })
+            var queryText = _context.customer
+                .Where(k => k.hovadem.Contains(PostSearchAndFilter.searchString)
+                        || k.ten.Contains(PostSearchAndFilter.searchString)
+                )
+                .Select(t => new
+                    {
+                        _id = t._id,
+                        anh = t.anh,
+                        xungho = t.xungho,
+                        hovadem = t.hovadem,
+                        ten = t.ten,
+                        phongban = t.phongban,
+                        chucdanh = t.chucdanh,
+                        dtdidong = t.dtdidong,
+                        dtcoquan = t.dtcoquan,
+                        loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
+                        the = t.the.Select(p => p.theContent),
+                        nguongoc = t.nguongoc,
+                        zalo = t.zalo,
+                        emailcanhan = t.emailcanhan,
+                        emailcoquan = t.emailcoquan,
+                        tochuc = t.tochuc,
+                        masothue = t.masothue,
+                        taikhoannganhang = t.taikhoannganhang,
+                        motainganhang = t.motainganhang,
+                        ngaythanhlap = t.ngaythanhlap,
+                        loaihinh = t.loaihinh,
+                        linhvuc = t.linhvuc,
+                        nganhnghe = t.nganhnghe,
+                        doanhthu = t.doanhthu,
+                        quocgia = t.quocgia,
+                        tinhthanhpho = t.tinhthanhpho,
+                        quanhuyen = t.quanhuyen,
+                        phuongxa = t.phuongxa,
+                        sonha = t.sonha,
+                        mota = t.mota,
+                        dungchung = t.dungchung,
+                        history = t.history.Select(u => u.historyContent)
+                    })
                 ;
             return Ok(await queryText.ToListAsync());
         }
@@ -255,7 +263,15 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return Problem("Entity set 'customerDatabaseContext.customer'  is null.");
             }
-
+            bool Postdungchung;
+            if(PostCustomerBody.dungChung == true)
+            {
+                Postdungchung = true;
+            }
+            else
+            {
+                Postdungchung = false;
+            }
             customer newCustomer = new()
             {
                 _id = PostCustomerBody._id,
@@ -286,48 +302,57 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 phuongxa = PostCustomerBody.phuongXa,
                 sonha = PostCustomerBody.soNha,
                 mota = PostCustomerBody.moTa,
-                dungchung = PostCustomerBody.dungChung,
+                dungchung = Postdungchung,
             };
             _context.customer.Add(newCustomer);
             await _context.SaveChangesAsync();
 
 
             //thêm nhiều loại tiềm năng, thẻ, lịch sử dựa trên _id customer vừa tạo
-            for (int i = 0; i < PostCustomerBody.loaiTiemNang.Count(); i++ )
+            if (PostCustomerBody.loaiTiemNang != null)
             {
-                loaitiemnang newLoaitiemnang = new()
+                for (int i = 0; i < PostCustomerBody.loaiTiemNang.Count(); i++)
                 {
-                    loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
-                    loaitiemnangContent = PostCustomerBody.loaiTiemNang[i],
-                    customerId = newCustomer._id
-                };
-                _context.loaitiemnang.Add(newLoaitiemnang);
-                await _context.SaveChangesAsync();
+                    loaitiemnang newLoaitiemnang = new()
+                    {
+                        loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
+                        loaitiemnangContent = PostCustomerBody.loaiTiemNang[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.loaitiemnang.Add(newLoaitiemnang);
+                    await _context.SaveChangesAsync();
 
+                }
             }
-            for (int i = 0; i < PostCustomerBody.the.Count(); i++)
+            if (PostCustomerBody.the != null)
             {
-                the newThe = new()
+                for (int i = 0; i < PostCustomerBody.the.Count(); i++)
                 {
-                    theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
-                    theContent = PostCustomerBody.the[i],
-                    customerId = newCustomer._id
-                };
-                _context.the.Add(newThe);
-                await _context.SaveChangesAsync();
+                    the newThe = new()
+                    {
+                        theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
+                        theContent = PostCustomerBody.the[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.the.Add(newThe);
+                    await _context.SaveChangesAsync();
 
+                }
             }
-            for (int i = 0; i < PostCustomerBody.history.Count(); i++)
+            if (PostCustomerBody.history != null)
             {
-                history newHistory = new()
+                for (int i = 0; i < PostCustomerBody.history.Count(); i++)
                 {
-                    historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
-                    historyContent = PostCustomerBody.history[i],
-                    customerId = newCustomer._id
-                };
-                _context.history.Add(newHistory);
-                await _context.SaveChangesAsync();
+                    history newHistory = new()
+                    {
+                        historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
+                        historyContent = PostCustomerBody.history[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.history.Add(newHistory);
+                    await _context.SaveChangesAsync();
 
+                }
             }
 
             return Ok();
@@ -346,7 +371,15 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return Problem("Entity set 'customerDatabaseContext.customer'  is null.");
             }
-
+            bool Postdungchung;
+            if (PostCustomerBody.dungChung == true)
+            {
+                Postdungchung = true;
+            }
+            else
+            {
+                Postdungchung = false;
+            }
             customer newCustomer = new()
             {
                 _id = PostCustomerBody._id,
@@ -377,7 +410,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 phuongxa = PostCustomerBody.phuongXa,
                 sonha = PostCustomerBody.soNha,
                 mota = PostCustomerBody.moTa,
-                dungchung = PostCustomerBody.dungChung,
+                dungchung = Postdungchung,
             };
             _context.customer.Update(newCustomer);
             await _context.SaveChangesAsync();
@@ -400,16 +433,19 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             }
             await _context.SaveChangesAsync();
 
-            for (int i = 0; i < PostCustomerBody.loaiTiemNang.Count(); i++)
+            if (PostCustomerBody.loaiTiemNang != null)
             {
-                loaitiemnang newLoaitiemnang = new()
+                for (int i = 0; i < PostCustomerBody.loaiTiemNang.Count(); i++)
                 {
-                    loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
-                    loaitiemnangContent = PostCustomerBody.loaiTiemNang[i],
-                    customerId = newCustomer._id
-                };
-                _context.loaitiemnang.Add(newLoaitiemnang);
-                await _context.SaveChangesAsync();
+                    loaitiemnang newLoaitiemnang = new()
+                    {
+                        loaitiemnangId = (_context.loaitiemnang.Count() > 0) ? (_context.loaitiemnang.OrderByDescending(p => p.loaitiemnangId).FirstOrDefault().loaitiemnangId + 1) : 1,
+                        loaitiemnangContent = PostCustomerBody.loaiTiemNang[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.loaitiemnang.Add(newLoaitiemnang);
+                    await _context.SaveChangesAsync();
+                }
             }
 
 
@@ -429,16 +465,19 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             }
             await _context.SaveChangesAsync();
 
-            for (int i = 0; i < PostCustomerBody.the.Count(); i++)
+            if (PostCustomerBody.the != null)
             {
-                the newThe = new()
+                for (int i = 0; i < PostCustomerBody.the.Count(); i++)
                 {
-                    theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
-                    theContent = PostCustomerBody.the[i],
-                    customerId = newCustomer._id
-                };
-                _context.the.Add(newThe);
-                await _context.SaveChangesAsync();
+                    the newThe = new()
+                    {
+                        theId = (_context.the.Count() > 0) ? (_context.the.OrderByDescending(p => p.theId).FirstOrDefault().theId + 1) : 1,
+                        theContent = PostCustomerBody.the[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.the.Add(newThe);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             //xóa lịch sử giao dịch cũ và thêm lịch sử giao dịch mới
@@ -457,16 +496,19 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             }
             await _context.SaveChangesAsync();
 
-            for (int i = 0; i < PostCustomerBody.history.Count(); i++)
+            if (PostCustomerBody.history != null)
             {
-                history newHistory = new()
+                for (int i = 0; i < PostCustomerBody.history.Count(); i++)
                 {
-                    historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
-                    historyContent = PostCustomerBody.history[i],
-                    customerId = newCustomer._id
-                };
-                _context.history.Add(newHistory);
-                await _context.SaveChangesAsync();
+                    history newHistory = new()
+                    {
+                        historyId = (_context.history.Count() > 0) ? (_context.history.OrderByDescending(p => p.historyId).FirstOrDefault().historyId + 1) : 1,
+                        historyContent = PostCustomerBody.history[i],
+                        customerId = newCustomer._id
+                    };
+                    _context.history.Add(newHistory);
+                    await _context.SaveChangesAsync();
+                }
             }
             return Ok();
         }
