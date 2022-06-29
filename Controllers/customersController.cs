@@ -47,6 +47,11 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
             var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
 
+            // biểu thức lọc customer từ file FilterCustomerInfo.cs
+            FilterCustomerInfo filterCustomer = new FilterCustomerInfo();
+            var filterString = filterCustomer.filterQuery(PostSearchAndFilter);
+
+
             // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
             List<object> queryText;
 
@@ -66,8 +71,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             }
             else
             {
-                queryText = _context.customer.Where(searchString).Skip(PostSearchAndFilter.startIndex)
-                    .Take(PostSearchAndFilter.limit).Select(selectQuery).ToList();
+                queryText = _context.customer.Where(searchString).Where(filterString)
+                    .Skip(PostSearchAndFilter.startIndex).Take(PostSearchAndFilter.limit).Select(selectQuery).ToList();
             }
             return Ok(queryText);
         }
@@ -84,8 +89,13 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
             var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
 
+            // biểu thức lọc customer từ file FilterCustomerInfo.cs
+            FilterCustomerInfo filterCustomer = new FilterCustomerInfo();
+            var filterString = filterCustomer.filterQuery(PostSearchAndFilter);
+
+
             var queryText = _context.customer
-                .Where(searchString).Count()
+                .Where(searchString).Where(filterString).Count()
                 ;
             return Ok(queryText);
         }
