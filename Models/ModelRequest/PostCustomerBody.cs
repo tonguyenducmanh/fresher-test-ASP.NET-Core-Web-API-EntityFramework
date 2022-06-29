@@ -2,37 +2,37 @@
 {
     public class PostCustomerBody
     {
-        public string _id { get; set; } = default!;
-        public string anh { get; set; } = default!;
-        public string xungHo { get; set; } = default!;
-        public string hoVaDem { get; set; } = default!;
-        public string ten { get; set; } = default!;
-        public string phongBan { get; set; } = default!;
-        public string chucDanh { get; set; } = default!;
-        public string dienThoaiDiDong { get; set; } = default!;
-        public string dienThoaiCoQuan { get; set; } = default!;
-        public string nguonGoc { get; set; } = default!;
-        public string zalo { get; set; } = default!;
-        public string emailCaNhan { get; set; } = default!;
-        public string emailCoQuan { get; set; } = default!;
-        public string toChuc { get; set; } = default!;
-        public string maSoThue { get; set; } = default!;
-        public string taiKhoanNganHang { get; set; } = default!;
-        public string moTaiNganHang { get; set; } = default!;
-        public string ngayThanhLap { get; set; } = default!;
-        public string loaiHinh { get; set; } = default!;
-        public string linhVuc { get; set; } = default!;
-        public string nganhNghe { get; set; } = default!;
-        public string doanhThu { get; set; } = default!;
-        public string quocGia { get; set; } = default!;
-        public string tinhThanh { get; set; } = default!;
-        public string quanHuyen { get; set; } = default!;
-        public string phuongXa { get; set; } = default!;
-        public string soNha { get; set; } = default!;
-        public string moTa { get; set; } = default!;
-        public bool dungChung { get; set; } = default!;
-        public string[] loaiTiemNang { get; set; } = default!;
-        public string[] the { get; set; } = default!;
-        public string[] history { get; set; } = default!;
+        public string _id { get; set; }
+        public string? anh { get; set; }
+        public string? xungHo { get; set; }
+        public string? hoVaDem { get; set; }
+        public string? ten { get; set; }
+        public string? phongBan { get; set; }
+        public string? chucDanh { get; set; }
+        public string? dienThoaiDiDong { get; set; }
+        public string? dienThoaiCoQuan { get; set; }
+        public string? nguonGoc { get; set; }
+        public string? zalo { get; set; }
+        public string? emailCaNhan { get; set; }
+        public string? emailCoQuan { get; set; }
+        public string? toChuc { get; set; }
+        public string? maSoThue { get; set; }
+        public string? taiKhoanNganHang { get; set; }
+        public string? moTaiNganHang { get; set; }
+        public string? ngayThanhLap { get; set; }
+        public string? loaiHinh { get; set; }
+        public string? linhVuc { get; set; }
+        public string? nganhNghe { get; set; }
+        public string? doanhThu { get; set; }
+        public string? quocGia { get; set; }
+        public string? tinhThanh { get; set; }
+        public string? quanHuyen { get; set; }
+        public string? phuongXa { get; set; }
+        public string? soNha { get; set; }
+        public string? moTa { get; set; }
+        public bool? dungChung { get; set; }
+        public string[]? loaiTiemNang { get; set; }
+        public string[]? the { get; set; }
+        public string[]? history { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using fresher_test_ASP.NET_Core_Web_API.Models;
 namespace fresher_test_ASP.NET_Core_Web_API.Migrations
 {
     [DbContext(typeof(customerDatabaseContext))]
-    [Migration("20220628000042_initial")]
+    [Migration("20220628135212_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,34 +26,27 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("anh")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("chucdanh")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("doanhthu")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtcoquan")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtdidong")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("dungchung")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("emailcanhan")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("emailcoquan")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("hovadem")
@@ -61,59 +54,45 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("linhvuc")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("loaihinh")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("masothue")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("mota")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("motainganhang")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nganhnghe")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ngaythanhlap")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nguongoc")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phongban")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phuongxa")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quanhuyen")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quocgia")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("sonha")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("taikhoannganhang")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ten")
@@ -121,19 +100,15 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("tinhthanhpho")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tochuc")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("xungho")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("zalo")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("_id");
@@ -163,238 +138,180 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("chucdanhCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("chucdanhString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("doanhthuCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("doanhthuString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtcoquanCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtcoquanString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtdidongCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dtdidongString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dungchungCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("dungchungString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("emailcanhanCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("emailcanhanString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("emailcoquanCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("emailcoquanString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("filterId")
                         .HasColumnType("int");
 
                     b.Property<string>("hovademCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("hovademString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("linhvucCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("linhvucString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("loaihinhCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("loaihinhString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("loaitiemnangCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("loaitiemnangString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("masothueCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("masothueString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("motaCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("motaString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("motainganhangCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("motainganhangString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nganhngheCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nganhngheString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ngaythanhlapCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ngaythanhlapString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nguongocCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("nguongocString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phongbanCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phongbanString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phuongxaCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("phuongxaString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quanhuyenCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quanhuyenString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quocgiaCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("quocgiaString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("sonhaCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("sonhaString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("taikhoannganhangCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("taikhoannganhangString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tenCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tenString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("theCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("theString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tinhthanhphoCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tinhthanhphoString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tochucCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("tochucString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("xunghoCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("xunghoString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("zaloCondition")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("zaloString")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("filterContentId");
