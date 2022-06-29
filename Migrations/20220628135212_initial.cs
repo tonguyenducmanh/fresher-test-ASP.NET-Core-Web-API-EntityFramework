@@ -18,59 +18,59 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                 {
                     _id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    anh = table.Column<string>(type: "longtext", nullable: false)
+                    anh = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    xungho = table.Column<string>(type: "longtext", nullable: false)
+                    xungho = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     hovadem = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ten = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phongban = table.Column<string>(type: "longtext", nullable: false)
+                    phongban = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    chucdanh = table.Column<string>(type: "longtext", nullable: false)
+                    chucdanh = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtdidong = table.Column<string>(type: "longtext", nullable: false)
+                    dtdidong = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtcoquan = table.Column<string>(type: "longtext", nullable: false)
+                    dtcoquan = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nguongoc = table.Column<string>(type: "longtext", nullable: false)
+                    nguongoc = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    zalo = table.Column<string>(type: "longtext", nullable: false)
+                    zalo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcanhan = table.Column<string>(type: "longtext", nullable: false)
+                    emailcanhan = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcoquan = table.Column<string>(type: "longtext", nullable: false)
+                    emailcoquan = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tochuc = table.Column<string>(type: "longtext", nullable: false)
+                    tochuc = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    masothue = table.Column<string>(type: "longtext", nullable: false)
+                    masothue = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    taikhoannganhang = table.Column<string>(type: "longtext", nullable: false)
+                    taikhoannganhang = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    motainganhang = table.Column<string>(type: "longtext", nullable: false)
+                    motainganhang = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ngaythanhlap = table.Column<string>(type: "longtext", nullable: false)
+                    ngaythanhlap = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    loaihinh = table.Column<string>(type: "longtext", nullable: false)
+                    loaihinh = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    linhvuc = table.Column<string>(type: "longtext", nullable: false)
+                    linhvuc = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nganhnghe = table.Column<string>(type: "longtext", nullable: false)
+                    nganhnghe = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    doanhthu = table.Column<string>(type: "longtext", nullable: false)
+                    doanhthu = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quocgia = table.Column<string>(type: "longtext", nullable: false)
+                    quocgia = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tinhthanhpho = table.Column<string>(type: "longtext", nullable: false)
+                    tinhthanhpho = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quanhuyen = table.Column<string>(type: "longtext", nullable: false)
+                    quanhuyen = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phuongxa = table.Column<string>(type: "longtext", nullable: false)
+                    phuongxa = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    sonha = table.Column<string>(type: "longtext", nullable: false)
+                    sonha = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    mota = table.Column<string>(type: "longtext", nullable: false)
+                    mota = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     dungchung = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
@@ -171,121 +171,121 @@ namespace fresher_test_ASP.NET_Core_Web_API.Migrations
                     filterContentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     filterId = table.Column<int>(type: "int", nullable: false),
-                    xunghoString = table.Column<string>(type: "longtext", nullable: false)
+                    xunghoString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    xunghoCondition = table.Column<string>(type: "longtext", nullable: false)
+                    xunghoCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    hovademString = table.Column<string>(type: "longtext", nullable: false)
+                    hovademString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    hovademCondition = table.Column<string>(type: "longtext", nullable: false)
+                    hovademCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tenString = table.Column<string>(type: "longtext", nullable: false)
+                    tenString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tenCondition = table.Column<string>(type: "longtext", nullable: false)
+                    tenCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phongbanString = table.Column<string>(type: "longtext", nullable: false)
+                    phongbanString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phongbanCondition = table.Column<string>(type: "longtext", nullable: false)
+                    phongbanCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    chucdanhString = table.Column<string>(type: "longtext", nullable: false)
+                    chucdanhString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    chucdanhCondition = table.Column<string>(type: "longtext", nullable: false)
+                    chucdanhCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtdidongString = table.Column<string>(type: "longtext", nullable: false)
+                    dtdidongString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtdidongCondition = table.Column<string>(type: "longtext", nullable: false)
+                    dtdidongCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtcoquanString = table.Column<string>(type: "longtext", nullable: false)
+                    dtcoquanString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dtcoquanCondition = table.Column<string>(type: "longtext", nullable: false)
+                    dtcoquanCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    loaitiemnangString = table.Column<string>(type: "longtext", nullable: false)
+                    loaitiemnangString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    loaitiemnangCondition = table.Column<string>(type: "longtext", nullable: false)
+                    loaitiemnangCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    theString = table.Column<string>(type: "longtext", nullable: false)
+                    theString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    theCondition = table.Column<string>(type: "longtext", nullable: false)
+                    theCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nguongocString = table.Column<string>(type: "longtext", nullable: false)
+                    nguongocString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nguongocCondition = table.Column<string>(type: "longtext", nullable: false)
+                    nguongocCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    zaloString = table.Column<string>(type: "longtext", nullable: false)
+                    zaloString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    zaloCondition = table.Column<string>(type: "longtext", nullable: false)
+                    zaloCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcanhanString = table.Column<string>(type: "longtext", nullable: false)
+                    emailcanhanString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcanhanCondition = table.Column<string>(type: "longtext", nullable: false)
+                    emailcanhanCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcoquanString = table.Column<string>(type: "longtext", nullable: false)
+                    emailcoquanString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    emailcoquanCondition = table.Column<string>(type: "longtext", nullable: false)
+                    emailcoquanCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tochucString = table.Column<string>(type: "longtext", nullable: false)
+                    tochucString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tochucCondition = table.Column<string>(type: "longtext", nullable: false)
+                    tochucCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    masothueString = table.Column<string>(type: "longtext", nullable: false)
+                    masothueString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    masothueCondition = table.Column<string>(type: "longtext", nullable: false)
+                    masothueCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    taikhoannganhangString = table.Column<string>(type: "longtext", nullable: false)
+                    taikhoannganhangString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    taikhoannganhangCondition = table.Column<string>(type: "longtext", nullable: false)
+                    taikhoannganhangCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    motainganhangString = table.Column<string>(type: "longtext", nullable: false)
+                    motainganhangString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    motainganhangCondition = table.Column<string>(type: "longtext", nullable: false)
+                    motainganhangCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ngaythanhlapString = table.Column<string>(type: "longtext", nullable: false)
+                    ngaythanhlapString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ngaythanhlapCondition = table.Column<string>(type: "longtext", nullable: false)
+                    ngaythanhlapCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    loaihinhString = table.Column<string>(type: "longtext", nullable: false)
+                    loaihinhString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    loaihinhCondition = table.Column<string>(type: "longtext", nullable: false)
+                    loaihinhCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    linhvucString = table.Column<string>(type: "longtext", nullable: false)
+                    linhvucString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    linhvucCondition = table.Column<string>(type: "longtext", nullable: false)
+                    linhvucCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nganhngheString = table.Column<string>(type: "longtext", nullable: false)
+                    nganhngheString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nganhngheCondition = table.Column<string>(type: "longtext", nullable: false)
+                    nganhngheCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    doanhthuString = table.Column<string>(type: "longtext", nullable: false)
+                    doanhthuString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    doanhthuCondition = table.Column<string>(type: "longtext", nullable: false)
+                    doanhthuCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quocgiaString = table.Column<string>(type: "longtext", nullable: false)
+                    quocgiaString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quocgiaCondition = table.Column<string>(type: "longtext", nullable: false)
+                    quocgiaCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tinhthanhphoString = table.Column<string>(type: "longtext", nullable: false)
+                    tinhthanhphoString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tinhthanhphoCondition = table.Column<string>(type: "longtext", nullable: false)
+                    tinhthanhphoCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quanhuyenString = table.Column<string>(type: "longtext", nullable: false)
+                    quanhuyenString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    quanhuyenCondition = table.Column<string>(type: "longtext", nullable: false)
+                    quanhuyenCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phuongxaString = table.Column<string>(type: "longtext", nullable: false)
+                    phuongxaString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phuongxaCondition = table.Column<string>(type: "longtext", nullable: false)
+                    phuongxaCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    sonhaString = table.Column<string>(type: "longtext", nullable: false)
+                    sonhaString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    sonhaCondition = table.Column<string>(type: "longtext", nullable: false)
+                    sonhaCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    motaString = table.Column<string>(type: "longtext", nullable: false)
+                    motaString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    motaCondition = table.Column<string>(type: "longtext", nullable: false)
+                    motaCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dungchungString = table.Column<string>(type: "longtext", nullable: false)
+                    dungchungString = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dungchungCondition = table.Column<string>(type: "longtext", nullable: false)
+                    dungchungCondition = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
