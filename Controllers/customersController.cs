@@ -42,14 +42,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             GetCustomerInfo getCustomer = new GetCustomerInfo();
             var selectQuery = getCustomer.selectQuery;
 
-            
-            Expression<Func<customer, bool>> searchString;
-            if (PostSearchAndFilter.searchString != null)
-                { searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-                || k.ten.Contains(PostSearchAndFilter.searchString);}
-            else { searchString = k => true; }
 
-            
+            // biểu thức tìm kiếm họ hoặc tên từ file SearchCustomerInfo.cs
+            SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
+            var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
 
             // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
             List<object> queryText;
@@ -83,11 +79,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             [FromForm] PostSearchAndFilter PostSearchAndFilter
             )
         {
-            Expression<Func<customer, bool>> searchString;
-            if (PostSearchAndFilter.searchString != null)
-                {searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-                || k.ten.Contains(PostSearchAndFilter.searchString);}
-            else { searchString = k => true; }
+
+            // biểu thức tìm kiếm họ hoặc tên từ file SearchCustomerInfo.cs
+            SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
+            var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
 
             var queryText = _context.customer
                 .Where(searchString).Count()
