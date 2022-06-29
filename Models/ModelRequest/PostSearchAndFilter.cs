@@ -16,7 +16,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
         public string? tenString { get; set; }
         public string? tenCondition { get; set; }*/
         public string? phongbanString { get; set; }
-        public string? phongbanCondition { get; set; }
+        public int? phongbanCondition { get; set; }
         /*public string? chucdanhString { get; set; }
         public string? chucdanhCondition { get; set; }
         public string? dtdidongString { get; set; }
