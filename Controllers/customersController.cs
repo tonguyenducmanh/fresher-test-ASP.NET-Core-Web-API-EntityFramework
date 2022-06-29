@@ -10,6 +10,7 @@ using fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest;
 
 namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 {
+
     [ApiController]
     public class customersController : ControllerBase
     {
@@ -33,9 +34,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 return NotFound();
             }
             var queryText = _context.customer
-                .Where(k => k.hovadem.Contains(PostSearchAndFilter.searchString)
+/*                .Where(k => k.hovadem.Contains(PostSearchAndFilter.searchString)
                         || k.ten.Contains(PostSearchAndFilter.searchString)
-                )
+                )*/
                 .Select(t => new
                     {
                         _id = t._id,
