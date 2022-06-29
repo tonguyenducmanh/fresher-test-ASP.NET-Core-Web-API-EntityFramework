@@ -24,8 +24,6 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         [HttpPost()]
         [Route("/customers/all")]
         [Consumes("multipart/form-data")]
-
-
         public async Task<ActionResult> PostFetchCustomer(
             [FromForm] PostSearchAndFilter PostSearchAndFilter
             )
@@ -87,10 +85,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
-            string lastCustomerId = _context.customer.OrderByDescending(p => p._id).FirstOrDefault()._id;
-
+           
             var queryText = _context.customer
-                .Where(t => t._id == lastCustomerId)
+                .OrderByDescending(t => t._id)
+                .Take(1)
                 .Select(t => new
             {
                 _id = t._id,
