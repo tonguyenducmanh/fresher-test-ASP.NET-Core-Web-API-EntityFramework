@@ -129,6 +129,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                ;
             return Ok(await queryText.ToListAsync());
         }
+
         // POST : /customers/find tìm danh sách người dùng theo id (để xuất ra file excell)
         [HttpPost()]
         [Route("/customers/find")]
