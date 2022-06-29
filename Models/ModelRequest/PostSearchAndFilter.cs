@@ -6,7 +6,12 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
     {
         [DefaultValue("")]
         public string? searchString { get; set; }
-        public string? xunghoString { get; set; } 
+        public int limit { get; set; } = 0;
+        public int startIndex { get; set; } = 0;
+
+
+
+        /*public string? xunghoString { get; set; } 
         public string? xunghoCondition { get; set; } 
         public string? hovademString { get; set; } 
         public string? hovademCondition { get; set; } 
@@ -63,6 +68,6 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
         public string? motaString { get; set; } 
         public string? motaCondition { get; set; } 
         public string? dungchungString { get; set; } 
-        public string? dungchungCondition { get; set; }
+        public string? dungchungCondition { get; set; }*/
     }
 }

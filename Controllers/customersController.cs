@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using fresher_test_ASP.NET_Core_Web_API.Models;
 using fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest;
+using System.Linq.Expressions;
 
 namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 {
@@ -33,49 +34,94 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
-            var queryText = _context.customer
-/*                .Where(k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-                        || k.ten.Contains(PostSearchAndFilter.searchString)
-                )*/
-                .Select(t => new
-                    {
-                        _id = t._id,
-                        anh = t.anh,
-                        xungho = t.xungho,
-                        hovadem = t.hovadem,
-                        ten = t.ten,
-                        phongban = t.phongban,
-                        chucdanh = t.chucdanh,
-                        dtdidong = t.dtdidong,
-                        dtcoquan = t.dtcoquan,
-                        loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                        the = t.the.Select(p => p.theContent),
-                        nguongoc = t.nguongoc,
-                        zalo = t.zalo,
-                        emailcanhan = t.emailcanhan,
-                        emailcoquan = t.emailcoquan,
-                        tochuc = t.tochuc,
-                        masothue = t.masothue,
-                        taikhoannganhang = t.taikhoannganhang,
-                        motainganhang = t.motainganhang,
-                        ngaythanhlap = t.ngaythanhlap,
-                        loaihinh = t.loaihinh,
-                        linhvuc = t.linhvuc,
-                        nganhnghe = t.nganhnghe,
-                        doanhthu = t.doanhthu,
-                        quocgia = t.quocgia,
-                        tinhthanhpho = t.tinhthanhpho,
-                        quanhuyen = t.quanhuyen,
-                        phuongxa = t.phuongxa,
-                        sonha = t.sonha,
-                        mota = t.mota,
-                        dungchung = t.dungchung,
-                        history = t.history.Select(u => u.historyContent)
-                    })
-                ;
-            return Ok(await queryText.ToListAsync());
-        }
+            /*
+            Expression<Func<customer, bool>> searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
+            || k.ten.Contains(PostSearchAndFilter.searchString);*/
+            Expression<Func<customer, bool>> searchString;
+            if (PostSearchAndFilter.searchString != null)
+                { searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
+                || k.ten.Contains(PostSearchAndFilter.searchString);}
+            else { searchString = k => true; }
 
+            Expression<Func<customer, object>> selectQuery = t => new
+            {
+                _id = t._id,
+                anh = t.anh,
+                xungho = t.xungho,
+                hovadem = t.hovadem,
+                ten = t.ten,
+                phongban = t.phongban,
+                chucdanh = t.chucdanh,
+                dtdidong = t.dtdidong,
+                dtcoquan = t.dtcoquan,
+                loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
+                the = t.the.Select(p => p.theContent),
+                nguongoc = t.nguongoc,
+                zalo = t.zalo,
+                emailcanhan = t.emailcanhan,
+                emailcoquan = t.emailcoquan,
+                tochuc = t.tochuc,
+                masothue = t.masothue,
+                taikhoannganhang = t.taikhoannganhang,
+                motainganhang = t.motainganhang,
+                ngaythanhlap = t.ngaythanhlap,
+                loaihinh = t.loaihinh,
+                linhvuc = t.linhvuc,
+                nganhnghe = t.nganhnghe,
+                doanhthu = t.doanhthu,
+                quocgia = t.quocgia,
+                tinhthanhpho = t.tinhthanhpho,
+                quanhuyen = t.quanhuyen,
+                phuongxa = t.phuongxa,
+                sonha = t.sonha,
+                mota = t.mota,
+                dungchung = t.dungchung,
+                history = t.history.Select(u => u.historyContent)
+            };
+
+            // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
+            List<object> queryText;
+
+            if(PostSearchAndFilter.limit == 0 || PostSearchAndFilter.limit == null)
+            {
+                queryText = _context.customer.Where(searchString)
+                    .Skip(PostSearchAndFilter.startIndex).Select(selectQuery).ToList();
+            }
+            else if(PostSearchAndFilter.startIndex == 0 || PostSearchAndFilter.startIndex == null)
+            {
+                queryText = _context.customer.Where(searchString).Take(PostSearchAndFilter.limit)
+                    .Select(selectQuery).ToList();
+            }
+            else if(PostSearchAndFilter.limit == 0 && PostSearchAndFilter.startIndex == 0)
+            {
+                queryText = _context.customer.Select(selectQuery).ToList();
+            }
+            else
+            {
+                queryText = _context.customer.Where(searchString).Skip(PostSearchAndFilter.startIndex)
+                    .Take(PostSearchAndFilter.limit).Select(selectQuery).ToList();
+            }
+            return Ok(queryText);
+        }
+        
+        // POST : /customers/count đếm lượng người dùng
+        [HttpPost()]
+        [Route("/customers/count")]
+        public async Task<ActionResult> PostCountCutomer(
+            [FromForm] PostSearchAndFilter PostSearchAndFilter
+            )
+        {
+            Expression<Func<customer, bool>> searchString;
+            if (PostSearchAndFilter.searchString != null)
+                {searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
+                || k.ten.Contains(PostSearchAndFilter.searchString);}
+            else { searchString = k => true; }
+
+            var queryText = _context.customer
+                .Where(searchString).Count()
+                ;
+            return Ok(queryText);
+        }
 
         // GET : /customers/last tải bản ghi cuối cùng
         [HttpGet()]
@@ -537,12 +583,5 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             return NoContent();
         }
 
-        // POST : /customers/count đếm lượng người dùng
-        [HttpPost()]
-        [Route("/customers/count")]
-        public async Task<ActionResult> PostCountCutomer()
-        {
-            return Ok();
-        }
     }
 }
