@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using fresher_test_ASP.NET_Core_Web_API.Models;
 using fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest;
 using System.Linq.Expressions;
+using fresher_test_ASP.NET_Core_Web_API.Services;
 
 namespace fresher_test_ASP.NET_Core_Web_API.Controllers
 {
@@ -34,50 +35,21 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
-            /*
-            Expression<Func<customer, bool>> searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-            || k.ten.Contains(PostSearchAndFilter.searchString);*/
+
+            //query for select customer, loaitiemnang, history, the
+            // return json file with multiple dimenstion array
+
+            GetCustomerInfo getCustomer = new GetCustomerInfo();
+            var selectQuery = getCustomer.selectQuery;
+
+            
             Expression<Func<customer, bool>> searchString;
             if (PostSearchAndFilter.searchString != null)
                 { searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
                 || k.ten.Contains(PostSearchAndFilter.searchString);}
             else { searchString = k => true; }
 
-            Expression<Func<customer, object>> selectQuery = t => new
-            {
-                _id = t._id,
-                anh = t.anh,
-                xungho = t.xungho,
-                hovadem = t.hovadem,
-                ten = t.ten,
-                phongban = t.phongban,
-                chucdanh = t.chucdanh,
-                dtdidong = t.dtdidong,
-                dtcoquan = t.dtcoquan,
-                loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                the = t.the.Select(p => p.theContent),
-                nguongoc = t.nguongoc,
-                zalo = t.zalo,
-                emailcanhan = t.emailcanhan,
-                emailcoquan = t.emailcoquan,
-                tochuc = t.tochuc,
-                masothue = t.masothue,
-                taikhoannganhang = t.taikhoannganhang,
-                motainganhang = t.motainganhang,
-                ngaythanhlap = t.ngaythanhlap,
-                loaihinh = t.loaihinh,
-                linhvuc = t.linhvuc,
-                nganhnghe = t.nganhnghe,
-                doanhthu = t.doanhthu,
-                quocgia = t.quocgia,
-                tinhthanhpho = t.tinhthanhpho,
-                quanhuyen = t.quanhuyen,
-                phuongxa = t.phuongxa,
-                sonha = t.sonha,
-                mota = t.mota,
-                dungchung = t.dungchung,
-                history = t.history.Select(u => u.historyContent)
-            };
+            
 
             // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
             List<object> queryText;
@@ -132,45 +104,17 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
-           
+
+            //query for select customer, loaitiemnang, history, the
+            // return json file with multiple dimenstion array
+
+            GetCustomerInfo getCustomer = new GetCustomerInfo();
+            var selectQuery = getCustomer.selectQuery;
+
             var queryText = _context.customer
                 .OrderByDescending(t => t._id)
                 .Take(1)
-                .Select(t => new
-            {
-                _id = t._id,
-                anh = t.anh,
-                xungho = t.xungho,
-                hovadem = t.hovadem,
-                ten = t.ten,
-                phongban = t.phongban,
-                chucdanh = t.chucdanh,
-                dtdidong = t.dtdidong,
-                dtcoquan = t.dtcoquan,
-                loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                the = t.the.Select(p => p.theContent),
-                nguongoc = t.nguongoc,
-                zalo = t.zalo,
-                emailcanhan = t.emailcanhan,
-                emailcoquan = t.emailcoquan,
-                tochuc = t.tochuc,
-                masothue = t.masothue,
-                taikhoannganhang = t.taikhoannganhang,
-                motainganhang = t.motainganhang,
-                ngaythanhlap = t.ngaythanhlap,
-                loaihinh = t.loaihinh,
-                linhvuc = t.linhvuc,
-                nganhnghe = t.nganhnghe,
-                doanhthu = t.doanhthu,
-                quocgia = t.quocgia,
-                tinhthanhpho = t.tinhthanhpho,
-                quanhuyen = t.quanhuyen,
-                phuongxa = t.phuongxa,
-                sonha = t.sonha,
-                mota = t.mota,
-                dungchung = t.dungchung,
-                history = t.history.Select(u => u.historyContent)
-            })
+                .Select(selectQuery)
                ;
             return Ok(await queryText.ToListAsync());
         }
@@ -184,46 +128,19 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
+
+            //query for select customer, loaitiemnang, history, the
+            // return json file with multiple dimenstion array
+
+            GetCustomerInfo getCustomer = new GetCustomerInfo();
+            var selectQuery = getCustomer.selectQuery;
+
             List<object> findCustomerResult = new();
             foreach (string id2 in idsString)
             {
                 var queryText = _context.customer
                     .Where(t => t._id == id2)
-                    .Select(t => new
-                    {
-                        _id = t._id,
-                        anh = t.anh,
-                        xungho = t.xungho,
-                        hovadem = t.hovadem,
-                        ten = t.ten,
-                        phongban = t.phongban,
-                        chucdanh = t.chucdanh,
-                        dtdidong = t.dtdidong,
-                        dtcoquan = t.dtcoquan,
-                        loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                        the = t.the.Select(p => p.theContent),
-                        nguongoc = t.nguongoc,
-                        zalo = t.zalo,
-                        emailcanhan = t.emailcanhan,
-                        emailcoquan = t.emailcoquan,
-                        tochuc = t.tochuc,
-                        masothue = t.masothue,
-                        taikhoannganhang = t.taikhoannganhang,
-                        motainganhang = t.motainganhang,
-                        ngaythanhlap = t.ngaythanhlap,
-                        loaihinh = t.loaihinh,
-                        linhvuc = t.linhvuc,
-                        nganhnghe = t.nganhnghe,
-                        doanhthu = t.doanhthu,
-                        quocgia = t.quocgia,
-                        tinhthanhpho = t.tinhthanhpho,
-                        quanhuyen = t.quanhuyen,
-                        phuongxa = t.phuongxa,
-                        sonha = t.sonha,
-                        mota = t.mota,
-                        dungchung = t.dungchung,
-                        history = t.history.Select(u => u.historyContent)
-                    })
+                    .Select(selectQuery)
                    ;
                 if (queryText == null)
                 {
@@ -248,43 +165,14 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return NotFound();
             }
-            var queryText = _context.customer
-                .Where(t => t._id == findID)
-                .Select(t => new
-                {
-                    _id = t._id,
-                    anh = t.anh,
-                    xungho = t.xungho,
-                    hovadem = t.hovadem,
-                    ten = t.ten,
-                    phongban = t.phongban,
-                    chucdanh = t.chucdanh,
-                    dtdidong = t.dtdidong,
-                    dtcoquan = t.dtcoquan,
-                    loaitiemnang = t.loaitiemnang.Select(k => k.loaitiemnangContent),
-                    the = t.the.Select(p => p.theContent),
-                    nguongoc = t.nguongoc,
-                    zalo = t.zalo,
-                    emailcanhan = t.emailcanhan,
-                    emailcoquan = t.emailcoquan,
-                    tochuc = t.tochuc,
-                    masothue = t.masothue,
-                    taikhoannganhang = t.taikhoannganhang,
-                    motainganhang = t.motainganhang,
-                    ngaythanhlap = t.ngaythanhlap,
-                    loaihinh = t.loaihinh,
-                    linhvuc = t.linhvuc,
-                    nganhnghe = t.nganhnghe,
-                    doanhthu = t.doanhthu,
-                    quocgia = t.quocgia,
-                    tinhthanhpho = t.tinhthanhpho,
-                    quanhuyen = t.quanhuyen,
-                    phuongxa = t.phuongxa,
-                    sonha = t.sonha,
-                    mota = t.mota,
-                    dungchung = t.dungchung,
-                    history = t.history.Select(u => u.historyContent)
-                }).ToList()
+
+            //query for select customer, loaitiemnang, history, the
+            // return json file with multiple dimenstion array
+
+            GetCustomerInfo getCustomer = new GetCustomerInfo();
+            var selectQuery = getCustomer.selectQuery;
+
+            var queryText = _context.customer.Where(t => t._id == findID).Select(selectQuery).ToList()
                ;
             if(queryText.Count() == 1)
             {
@@ -309,47 +197,12 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return Problem("Entity set 'customerDatabaseContext.customer'  is null.");
             }
-            bool Postdungchung;
-            if(PostCustomerBody.dungChung == true)
-            {
-                Postdungchung = true;
-            }
-            else
-            {
-                Postdungchung = false;
-            }
-            customer newCustomer = new()
-            {
-                _id = PostCustomerBody._id,
-                anh = PostCustomerBody.anh,
-                xungho = PostCustomerBody.xungHo,
-                hovadem = PostCustomerBody.hoVaDem,
-                ten = PostCustomerBody.ten,
-                phongban = PostCustomerBody.phongBan,
-                chucdanh = PostCustomerBody.chucDanh,
-                dtdidong = PostCustomerBody.dienThoaiDiDong,
-                dtcoquan = PostCustomerBody.dienThoaiCoQuan,
-                nguongoc = PostCustomerBody.nguonGoc,
-                zalo = PostCustomerBody.zalo,
-                emailcanhan = PostCustomerBody.emailCaNhan,
-                emailcoquan = PostCustomerBody.emailCoQuan,
-                tochuc = PostCustomerBody.toChuc,
-                masothue = PostCustomerBody.maSoThue,
-                taikhoannganhang = PostCustomerBody.taiKhoanNganHang,
-                motainganhang = PostCustomerBody.moTaiNganHang,
-                ngaythanhlap = PostCustomerBody.ngayThanhLap,
-                loaihinh = PostCustomerBody.loaiHinh,
-                linhvuc = PostCustomerBody.linhVuc,
-                nganhnghe = PostCustomerBody.nganhNghe,
-                doanhthu = PostCustomerBody.doanhThu,
-                quocgia = PostCustomerBody.quocGia,
-                tinhthanhpho = PostCustomerBody.tinhThanh,
-                quanhuyen = PostCustomerBody.quanHuyen,
-                phuongxa = PostCustomerBody.phuongXa,
-                sonha = PostCustomerBody.soNha,
-                mota = PostCustomerBody.moTa,
-                dungchung = Postdungchung,
-            };
+
+            //tạo object setcustomer và gọi method postcustomerinfo
+            SetCustomerInfo setcustomer =  new SetCustomerInfo();
+
+            var newCustomer = setcustomer.PostCustomerInfo(PostCustomerBody);
+
             _context.customer.Add(newCustomer);
             await _context.SaveChangesAsync();
 
@@ -417,47 +270,11 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             {
                 return Problem("Entity set 'customerDatabaseContext.customer'  is null.");
             }
-            bool Postdungchung;
-            if (PostCustomerBody.dungChung == true)
-            {
-                Postdungchung = true;
-            }
-            else
-            {
-                Postdungchung = false;
-            }
-            customer newCustomer = new()
-            {
-                _id = PostCustomerBody._id,
-                anh = PostCustomerBody.anh,
-                xungho = PostCustomerBody.xungHo,
-                hovadem = PostCustomerBody.hoVaDem,
-                ten = PostCustomerBody.ten,
-                phongban = PostCustomerBody.phongBan,
-                chucdanh = PostCustomerBody.chucDanh,
-                dtdidong = PostCustomerBody.dienThoaiDiDong,
-                dtcoquan = PostCustomerBody.dienThoaiCoQuan,
-                nguongoc = PostCustomerBody.nguonGoc,
-                zalo = PostCustomerBody.zalo,
-                emailcanhan = PostCustomerBody.emailCaNhan,
-                emailcoquan = PostCustomerBody.emailCoQuan,
-                tochuc = PostCustomerBody.toChuc,
-                masothue = PostCustomerBody.maSoThue,
-                taikhoannganhang = PostCustomerBody.taiKhoanNganHang,
-                motainganhang = PostCustomerBody.moTaiNganHang,
-                ngaythanhlap = PostCustomerBody.ngayThanhLap,
-                loaihinh = PostCustomerBody.loaiHinh,
-                linhvuc = PostCustomerBody.linhVuc,
-                nganhnghe = PostCustomerBody.nganhNghe,
-                doanhthu = PostCustomerBody.doanhThu,
-                quocgia = PostCustomerBody.quocGia,
-                tinhthanhpho = PostCustomerBody.tinhThanh,
-                quanhuyen = PostCustomerBody.quanHuyen,
-                phuongxa = PostCustomerBody.phuongXa,
-                sonha = PostCustomerBody.soNha,
-                mota = PostCustomerBody.moTa,
-                dungchung = Postdungchung,
-            };
+            //tạo object setcustomer và gọi method postcustomerinfo
+            SetCustomerInfo setcustomer = new SetCustomerInfo();
+
+            var newCustomer = setcustomer.PostCustomerInfo(PostCustomerBody);
+
             _context.customer.Update(newCustomer);
             await _context.SaveChangesAsync();
 
