@@ -27,6 +27,8 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
         public int? loaitiemnangCondition { get; set; }
         public string? theString { get; set; }
         public int? theCondition { get; set; }
+        public string? historyString { get; set; }
+        public int? historyCondition { get; set; }
         public string? nguongocString { get; set; }
         public int? nguongocCondition { get; set; }
         public string? zaloString { get; set; }
@@ -65,7 +67,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest
         public int? sonhaCondition { get; set; }
         public string? motaString { get; set; }
         public int? motaCondition { get; set; }
-        public string? dungchungString { get; set; }
+        public bool? dungchungString { get; set; }
         public int? dungchungCondition { get; set; }
     }
 }

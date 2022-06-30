@@ -27,39 +27,46 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         [HttpPost()]
         [Route("/customers/all")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult> PostFetchCustomer(
-            [FromForm] PostSearchAndFilter PostSearchAndFilter
-            )
+        public async Task<ActionResult> PostFetchCustomer([FromForm] PostSearchAndFilter PostSearchAndFilter)
         {
             if (_context.customer == null)
             {
                 return NotFound();
             }
 
-            //query for select customer, loaitiemnang, history, the
-            // return json file with multiple dimenstion array
-
-            GetCustomerInfo getCustomer = new GetCustomerInfo();
-            var selectQuery = getCustomer.selectQuery;
-
-
-            // biểu thức tìm kiếm họ hoặc tên từ file SearchCustomerInfo.cs
-            SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
-            var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
-
-            // biểu thức lọc customer từ file FilterCustomerInfo.cs
-            FilterCustomerInfo filterCustomer = new FilterCustomerInfo();
-            var filterString = filterCustomer.filterQuery(PostSearchAndFilter);
-
-            // biểu thức phân trang từ file PaginationCustomerInfo.cs
-            PaginationCustomerInfo paginationCustomer = new PaginationCustomerInfo();
-            int limitString = paginationCustomer.limitQuery(PostSearchAndFilter);
-            int startIndexString = paginationCustomer.startIndexQuery(PostSearchAndFilter);
-
-
             // tải danh sách customer
-            List<object> queryText = _context.customer.Where(searchString).Where(filterString)
-                    .Skip(startIndexString).Take(limitString).Select(selectQuery).ToList();
+            List<object> queryText = _context.customer
+                    .Where(new SearchCustomerInfo().searchQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().xunghoQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().hovademQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().tenQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().phongbanQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().chucdanhQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().dtdidongQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().dtcoquanQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().nguongocQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().zaloQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().emailcanhanQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().emailcoquanQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().tochucQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().masothueQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().taikhoannganhangQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().motainganhangQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().ngaythanhlapQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().loaihinhQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().linhvucQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().nganhngheQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().doanhthuQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().quocgiaQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().tinhthanhphoQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().quanhuyenQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().phuongxaQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().sonhaQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().motaQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().dungchungQuery(PostSearchAndFilter))
+                    .Skip(new PaginationCustomerInfo().startIndexQuery(PostSearchAndFilter))
+                    .Take(new PaginationCustomerInfo().limitQuery(PostSearchAndFilter))
+                    .Select(new GetCustomerInfo().selectQuery).ToList();
 
             return Ok(queryText);
         }
@@ -67,22 +74,39 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         // POST : /customers/count đếm lượng người dùng
         [HttpPost()]
         [Route("/customers/count")]
-        public async Task<ActionResult> PostCountCutomer(
-            [FromForm] PostSearchAndFilter PostSearchAndFilter
-            )
+        public async Task<ActionResult> PostCountCutomer([FromForm] PostSearchAndFilter PostSearchAndFilter)
         {
 
-            // biểu thức tìm kiếm họ hoặc tên từ file SearchCustomerInfo.cs
-            SearchCustomerInfo searchCustomer = new SearchCustomerInfo();
-            var searchString = searchCustomer.searchQuery(PostSearchAndFilter);
-
-            // biểu thức lọc customer từ file FilterCustomerInfo.cs
-            FilterCustomerInfo filterCustomer = new FilterCustomerInfo();
-            var filterString = filterCustomer.filterQuery(PostSearchAndFilter);
-
-
             var queryText = _context.customer
-                .Where(searchString).Where(filterString).Count()
+                .Where(new SearchCustomerInfo().searchQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().xunghoQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().hovademQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().tenQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().phongbanQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().chucdanhQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().dtdidongQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().dtcoquanQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().nguongocQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().zaloQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().emailcanhanQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().emailcoquanQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().tochucQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().masothueQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().taikhoannganhangQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().motainganhangQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().ngaythanhlapQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().loaihinhQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().linhvucQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().nganhngheQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().doanhthuQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().quocgiaQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().tinhthanhphoQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().quanhuyenQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().phuongxaQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().sonhaQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().motaQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().dungchungQuery(PostSearchAndFilter))
+                .Count()
                 ;
             return Ok(queryText);
         }
@@ -97,16 +121,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 return NotFound();
             }
 
-            //query for select customer, loaitiemnang, history, the
-            // return json file with multiple dimenstion array
-
-            GetCustomerInfo getCustomer = new GetCustomerInfo();
-            var selectQuery = getCustomer.selectQuery;
-
             var queryText = _context.customer
                 .OrderByDescending(t => t._id)
                 .Take(1)
-                .Select(selectQuery)
+                .Select(new GetCustomerInfo().selectQuery)
                ;
             return Ok(await queryText.ToListAsync());
         }
