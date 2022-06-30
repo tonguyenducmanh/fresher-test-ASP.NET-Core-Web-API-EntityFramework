@@ -27,70 +27,91 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
         [HttpPost()]
         [Route("/customers/all")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult> PostFetchCustomer(
-            [FromForm] PostSearchAndFilter PostSearchAndFilter
-            )
+        public async Task<ActionResult> PostFetchCustomer([FromForm] PostSearchAndFilter PostSearchAndFilter)
         {
             if (_context.customer == null)
             {
                 return NotFound();
             }
+            // tải danh sách customer
+            List<object> queryText = _context.customer
+                    .Where(new SearchCustomerInfo().searchQuery(PostSearchAndFilter))
+                    .Where(new FilterCustomerInfo().FilterQuery("xungho", PostSearchAndFilter.xunghoString, PostSearchAndFilter.xunghoCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("hovadem", PostSearchAndFilter.hovademString, PostSearchAndFilter.hovademCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("ten", PostSearchAndFilter.tenString, PostSearchAndFilter.tenCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("phongban", PostSearchAndFilter.phongbanString, PostSearchAndFilter.phongbanCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("chucdanh", PostSearchAndFilter.chucdanhString, PostSearchAndFilter.chucdanhCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("dtdidong", PostSearchAndFilter.dtdidongString, PostSearchAndFilter.dtdidongCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("dtcoquan", PostSearchAndFilter.dtcoquanString, PostSearchAndFilter.dtcoquanCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("nguongoc", PostSearchAndFilter.nguongocString, PostSearchAndFilter.nguongocCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("zalo", PostSearchAndFilter.zaloString, PostSearchAndFilter.zaloCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("emailcanhan", PostSearchAndFilter.emailcanhanString, PostSearchAndFilter.emailcanhanCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("emailcoquan", PostSearchAndFilter.emailcoquanString, PostSearchAndFilter.emailcoquanCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("tochuc", PostSearchAndFilter.tochucString, PostSearchAndFilter.tochucCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("masothue", PostSearchAndFilter.masothueString, PostSearchAndFilter.masothueCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("taikhoannganhang", PostSearchAndFilter.taikhoannganhangString, PostSearchAndFilter.taikhoannganhangCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("motainganhang", PostSearchAndFilter.motainganhangString, PostSearchAndFilter.motainganhangCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("ngaythanhlap", PostSearchAndFilter.ngaythanhlapString, PostSearchAndFilter.ngaythanhlapCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("loaihinh", PostSearchAndFilter.loaihinhString, PostSearchAndFilter.loaihinhCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("linhvuc", PostSearchAndFilter.linhvucString, PostSearchAndFilter.linhvucCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("nganhnghe", PostSearchAndFilter.nganhngheString, PostSearchAndFilter.nganhngheCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("doanhthu", PostSearchAndFilter.doanhthuString, PostSearchAndFilter.doanhthuCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("quocgia", PostSearchAndFilter.quocgiaString, PostSearchAndFilter.quocgiaCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("tinhthanhpho", PostSearchAndFilter.tinhthanhphoString, PostSearchAndFilter.tinhthanhphoCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("quanhuyen", PostSearchAndFilter.quanhuyenString, PostSearchAndFilter.quanhuyenCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("phuongxa", PostSearchAndFilter.phuongxaString, PostSearchAndFilter.phuongxaCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
+                    .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
+                    .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
+                    .Where(new FilterLoaitiemnangCustomerInfo().LoaitiemnangQuery(PostSearchAndFilter.loaitiemnangString, PostSearchAndFilter.loaitiemnangCondition))
+                    .Where(new FilterTheCustomerInfo().TheQuery(PostSearchAndFilter.theString, PostSearchAndFilter.theCondition))
+                    .Where(new FilterHistoryCustomerInfo().HistoryQuery(PostSearchAndFilter.historyString, PostSearchAndFilter.historyCondition))
+                    .Skip(new PaginationCustomerInfo().startIndexQuery(PostSearchAndFilter))
+                    .Take(new PaginationCustomerInfo().limitQuery(PostSearchAndFilter))
+                    .Select(new GetCustomerInfo().selectQuery).ToList();
 
-            //query for select customer, loaitiemnang, history, the
-            // return json file with multiple dimenstion array
-
-            GetCustomerInfo getCustomer = new GetCustomerInfo();
-            var selectQuery = getCustomer.selectQuery;
-
-            
-            Expression<Func<customer, bool>> searchString;
-            if (PostSearchAndFilter.searchString != null)
-                { searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-                || k.ten.Contains(PostSearchAndFilter.searchString);}
-            else { searchString = k => true; }
-
-            
-
-            // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
-            List<object> queryText;
-
-            if(PostSearchAndFilter.limit == 0 || PostSearchAndFilter.limit == null)
-            {
-                queryText = _context.customer.Where(searchString)
-                    .Skip(PostSearchAndFilter.startIndex).Select(selectQuery).ToList();
-            }
-            else if(PostSearchAndFilter.startIndex == 0 || PostSearchAndFilter.startIndex == null)
-            {
-                queryText = _context.customer.Where(searchString).Take(PostSearchAndFilter.limit)
-                    .Select(selectQuery).ToList();
-            }
-            else if(PostSearchAndFilter.limit == 0 && PostSearchAndFilter.startIndex == 0)
-            {
-                queryText = _context.customer.Select(selectQuery).ToList();
-            }
-            else
-            {
-                queryText = _context.customer.Where(searchString).Skip(PostSearchAndFilter.startIndex)
-                    .Take(PostSearchAndFilter.limit).Select(selectQuery).ToList();
-            }
             return Ok(queryText);
         }
         
         // POST : /customers/count đếm lượng người dùng
         [HttpPost()]
         [Route("/customers/count")]
-        public async Task<ActionResult> PostCountCutomer(
-            [FromForm] PostSearchAndFilter PostSearchAndFilter
-            )
+        public async Task<ActionResult> PostCountCutomer([FromForm] PostSearchAndFilter PostSearchAndFilter)
         {
-            Expression<Func<customer, bool>> searchString;
-            if (PostSearchAndFilter.searchString != null)
-                {searchString = k => k.hovadem.Contains(PostSearchAndFilter.searchString)
-                || k.ten.Contains(PostSearchAndFilter.searchString);}
-            else { searchString = k => true; }
 
             var queryText = _context.customer
-                .Where(searchString).Count()
+                .Where(new SearchCustomerInfo().searchQuery(PostSearchAndFilter))
+                .Where(new FilterCustomerInfo().FilterQuery("xungho", PostSearchAndFilter.xunghoString, PostSearchAndFilter.xunghoCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("hovadem", PostSearchAndFilter.hovademString, PostSearchAndFilter.hovademCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("ten", PostSearchAndFilter.tenString, PostSearchAndFilter.tenCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("phongban", PostSearchAndFilter.phongbanString, PostSearchAndFilter.phongbanCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("chucdanh", PostSearchAndFilter.chucdanhString, PostSearchAndFilter.chucdanhCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("dtdidong", PostSearchAndFilter.dtdidongString, PostSearchAndFilter.dtdidongCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("dtcoquan", PostSearchAndFilter.dtcoquanString, PostSearchAndFilter.dtcoquanCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("nguongoc", PostSearchAndFilter.nguongocString, PostSearchAndFilter.nguongocCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("zalo", PostSearchAndFilter.zaloString, PostSearchAndFilter.zaloCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("emailcanhan", PostSearchAndFilter.emailcanhanString, PostSearchAndFilter.emailcanhanCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("emailcoquan", PostSearchAndFilter.emailcoquanString, PostSearchAndFilter.emailcoquanCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("tochuc", PostSearchAndFilter.tochucString, PostSearchAndFilter.tochucCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("masothue", PostSearchAndFilter.masothueString, PostSearchAndFilter.masothueCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("taikhoannganhang", PostSearchAndFilter.taikhoannganhangString, PostSearchAndFilter.taikhoannganhangCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("motainganhang", PostSearchAndFilter.motainganhangString, PostSearchAndFilter.motainganhangCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("ngaythanhlap", PostSearchAndFilter.ngaythanhlapString, PostSearchAndFilter.ngaythanhlapCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("loaihinh", PostSearchAndFilter.loaihinhString, PostSearchAndFilter.loaihinhCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("linhvuc", PostSearchAndFilter.linhvucString, PostSearchAndFilter.linhvucCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("nganhnghe", PostSearchAndFilter.nganhngheString, PostSearchAndFilter.nganhngheCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("doanhthu", PostSearchAndFilter.doanhthuString, PostSearchAndFilter.doanhthuCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("quocgia", PostSearchAndFilter.quocgiaString, PostSearchAndFilter.quocgiaCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("tinhthanhpho", PostSearchAndFilter.tinhthanhphoString, PostSearchAndFilter.tinhthanhphoCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("quanhuyen", PostSearchAndFilter.quanhuyenString, PostSearchAndFilter.quanhuyenCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("phuongxa", PostSearchAndFilter.phuongxaString, PostSearchAndFilter.phuongxaCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
+                .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
+                .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
+                .Where(new FilterLoaitiemnangCustomerInfo().LoaitiemnangQuery(PostSearchAndFilter.loaitiemnangString, PostSearchAndFilter.loaitiemnangCondition))
+                .Where(new FilterTheCustomerInfo().TheQuery(PostSearchAndFilter.theString, PostSearchAndFilter.theCondition))
+                .Where(new FilterHistoryCustomerInfo().HistoryQuery(PostSearchAndFilter.historyString, PostSearchAndFilter.historyCondition))
+                .Count()
                 ;
             return Ok(queryText);
         }
@@ -105,16 +126,10 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 return NotFound();
             }
 
-            //query for select customer, loaitiemnang, history, the
-            // return json file with multiple dimenstion array
-
-            GetCustomerInfo getCustomer = new GetCustomerInfo();
-            var selectQuery = getCustomer.selectQuery;
-
             var queryText = _context.customer
                 .OrderByDescending(t => t._id)
                 .Take(1)
-                .Select(selectQuery)
+                .Select(new GetCustomerInfo().selectQuery)
                ;
             return Ok(await queryText.ToListAsync());
         }

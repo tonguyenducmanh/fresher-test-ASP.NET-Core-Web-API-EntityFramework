@@ -23,6 +23,12 @@ namespace fresher_test_ASP.NET_Core_Web_API.Models
         public string? emailcanhan { get; set; }
         public string? emailcoquan { get; set; }
         public string? tochuc { get; set; }
+
+        internal object GetType(string filterValue)
+        {
+            throw new NotImplementedException();
+        }
+
         public string? masothue { get; set; }
         public string? taikhoannganhang { get; set; }
         public string? motainganhang { get; set; }
