@@ -63,6 +63,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                     .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
                     .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
                     .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
+                    .Where(new FilterLoaitiemnangCustomerInfo().LoaitiemnangQuery(PostSearchAndFilter.loaitiemnangString, PostSearchAndFilter.loaitiemnangCondition))
+                    .Where(new FilterTheCustomerInfo().TheQuery(PostSearchAndFilter.theString, PostSearchAndFilter.theCondition))
+                    .Where(new FilterHistoryCustomerInfo().HistoryQuery(PostSearchAndFilter.historyString, PostSearchAndFilter.historyCondition))
                     .Skip(new PaginationCustomerInfo().startIndexQuery(PostSearchAndFilter))
                     .Take(new PaginationCustomerInfo().limitQuery(PostSearchAndFilter))
                     .Select(new GetCustomerInfo().selectQuery).ToList();
@@ -105,6 +108,9 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
                 .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
                 .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
+                .Where(new FilterLoaitiemnangCustomerInfo().LoaitiemnangQuery(PostSearchAndFilter.loaitiemnangString, PostSearchAndFilter.loaitiemnangCondition))
+                .Where(new FilterTheCustomerInfo().TheQuery(PostSearchAndFilter.theString, PostSearchAndFilter.theCondition))
+                .Where(new FilterHistoryCustomerInfo().HistoryQuery(PostSearchAndFilter.historyString, PostSearchAndFilter.historyCondition))
                 .Count()
                 ;
             return Ok(queryText);

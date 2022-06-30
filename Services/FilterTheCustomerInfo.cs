@@ -1,16 +1,11 @@
 ﻿using fresher_test_ASP.NET_Core_Web_API.Models;
-using fresher_test_ASP.NET_Core_Web_API.Models.ModelRequest;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace fresher_test_ASP.NET_Core_Web_API.Services
 {
-    public class FilterCustomerInfo
+    public class FilterTheCustomerInfo
     {
-
-        public Expression<Func<customer, bool>> FilterQuery(string? filterValue,string? filterString, int? filterCondition)
+        public Expression<Func<customer, bool>> TheQuery(string? filterString, int? filterCondition)
         {
             if (filterString != null)
             {
@@ -18,25 +13,22 @@ namespace fresher_test_ASP.NET_Core_Web_API.Services
                 {
                     case 1:
                         // trường hợp là
-                        // hiểu dòng dưới là k => k.filterValue == filterString. nhưng filterValue mình sẽ truyền
-                        // từ ngoài vào để dùng nhiều lần nên k viết trực tiếp được
-                        return k => Equals(EF.Property<bool>(k, filterValue), filterString);
+                        return k => (k.the.Where(t => t.theContent == filterString).Count() > 0);
                     case 2:
                         // trường hợp không là
-                        return k => !Equals(EF.Property<bool>(k, filterValue), filterString);
+                        return k => (k.the.Where(t => t.theContent != filterString).Count() > 0);
                     case 3:
                         // trường hợp chứa, không phân biệt chữ hoa chữ thường
-                        // dòng dưới tương đương k => k.filterValue.Contains(filterString)
-                        return k => EF.Property<string>(k, filterValue).Contains(filterString);
+                        return k => (k.the.Where(t => t.theContent.Contains(filterString)).Count() > 0);
                     case 4:
                         // trường hợp không chứa, không phân biệt chữ hoa chữ thường
-                        return k => !EF.Property<string>(k, filterValue).Contains(filterString);
+                        return k => (k.the.Where(t => t.theContent.Contains(filterString)).Count() == 0);
                     case 5:
                         // trường hợp trống hoặc có thể là null
-                        return k => EF.Property<bool>(k, filterValue) == null;
+                        return k => (k.the.Select(t => t.theId == 0).Count() == 0);
                     case 6:
                         // trường hợp không trống, khác rỗng hoặc khác null
-                        return k => EF.Property<bool>(k, filterValue) != null;
+                        return k => (k.the.Select(t => t.theId != 0).Count() > 0);
                     default:
                         // trường hợp mặc định, trả về true để tránh báo lỗi
                         return k => true;
@@ -49,17 +41,17 @@ namespace fresher_test_ASP.NET_Core_Web_API.Services
                 {
                     case 5:
                         // trường hợp trống hoặc có thể là null
-                        return k => EF.Property<bool>(k, filterValue) == null;
+                        return k => (k.the.Select(t => t.theId == 0).Count() == 0);
                     case 6:
                         // trường hợp không trống, khác rỗng hoặc khác null
-                        return k => EF.Property<bool>(k, filterValue) != null;
+                        return k => (k.the.Select(t => t.theId != 0).Count() > 0);
+
                     default:
                         // trường hợp mặc định, trả về true để tránh báo lỗi
                         return k => true;
                 }
             }
         }
-        
 
     }
 }
