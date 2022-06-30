@@ -51,29 +51,16 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
             FilterCustomerInfo filterCustomer = new FilterCustomerInfo();
             var filterString = filterCustomer.filterQuery(PostSearchAndFilter);
 
+            // biểu thức phân trang từ file PaginationCustomerInfo.cs
+            PaginationCustomerInfo paginationCustomer = new PaginationCustomerInfo();
+            int limitString = paginationCustomer.limitQuery(PostSearchAndFilter);
+            int startIndexString = paginationCustomer.startIndexQuery(PostSearchAndFilter);
 
-            // phân trang kết quả. ví dụ lấy 10 người từ người thứ 9
-            List<object> queryText;
 
-            if(PostSearchAndFilter.limit == 0 || PostSearchAndFilter.limit == null)
-            {
-                queryText = _context.customer.Where(searchString)
-                    .Skip(PostSearchAndFilter.startIndex).Select(selectQuery).ToList();
-            }
-            else if(PostSearchAndFilter.startIndex == 0 || PostSearchAndFilter.startIndex == null)
-            {
-                queryText = _context.customer.Where(searchString).Take(PostSearchAndFilter.limit)
-                    .Select(selectQuery).ToList();
-            }
-            else if(PostSearchAndFilter.limit == 0 && PostSearchAndFilter.startIndex == 0)
-            {
-                queryText = _context.customer.Select(selectQuery).ToList();
-            }
-            else
-            {
-                queryText = _context.customer.Where(searchString).Where(filterString)
-                    .Skip(PostSearchAndFilter.startIndex).Take(PostSearchAndFilter.limit).Select(selectQuery).ToList();
-            }
+            // tải danh sách customer
+            List<object> queryText = _context.customer.Where(searchString).Where(filterString)
+                    .Skip(startIndexString).Take(limitString).Select(selectQuery).ToList();
+
             return Ok(queryText);
         }
         
