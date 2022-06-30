@@ -62,6 +62,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                     .Where(new FilterCustomerInfo().FilterQuery("phuongxa", PostSearchAndFilter.phuongxaString, PostSearchAndFilter.phuongxaCondition))
                     .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
                     .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
+                    .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
                     .Skip(new PaginationCustomerInfo().startIndexQuery(PostSearchAndFilter))
                     .Take(new PaginationCustomerInfo().limitQuery(PostSearchAndFilter))
                     .Select(new GetCustomerInfo().selectQuery).ToList();
@@ -103,6 +104,7 @@ namespace fresher_test_ASP.NET_Core_Web_API.Controllers
                 .Where(new FilterCustomerInfo().FilterQuery("phuongxa", PostSearchAndFilter.phuongxaString, PostSearchAndFilter.phuongxaCondition))
                 .Where(new FilterCustomerInfo().FilterQuery("sonha", PostSearchAndFilter.sonhaString, PostSearchAndFilter.sonhaCondition))
                 .Where(new FilterCustomerInfo().FilterQuery("mota", PostSearchAndFilter.motaString, PostSearchAndFilter.motaCondition))
+                .Where(new FilterDungchungCustomerInfo().FilterQuery("dungchung", PostSearchAndFilter.dungchungString, PostSearchAndFilter.dungchungCondition))
                 .Count()
                 ;
             return Ok(queryText);
