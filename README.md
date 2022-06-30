@@ -12,15 +12,18 @@ https://github.com/tonguyenducmanh/fresher-test-NodeJS-ExpressJS
 
 
 ## Test localhost
+### Test Web API bằng Swagger tích hợp sẵn trong ASP.Net Core
+Không dùng 1 vài phương thức mặc định như GET vì còn 
+danh sách filter để lọc kết quả, thay vào đó dùng POST, ...
 ![Test Web API bằng Swagger](./screenshots/3.png)
 ### Kết quả trả về dạng JSON của web development
 ![Kết quả trả về](./screenshots/4.png)
 ### Kết quả trả về dạng JSON của web production
 ![Kết quả trả về 2](./screenshots//5.png)
+### Enable CORS tại địa chỉ client
+Thay thế vị trí mũi tên màu đỏ bằng giá trị của client muốn truy cập vào web api
+![CORS protect](./screenshots/6.png)
 ### Bảng thiết kế cơ sở dữ liệu
 ![Bảng thiết kế](./screenshots/1.png)
 ### Test truy vấn cơ sở dữ liệu customer
 ![customer](./screenshots/2.png)
-### Test Web API bằng Swagger tích hợp sẵn trong ASP.Net Core
-Không dùng 1 vài phương thức mặc định như GET vì còn 
-danh sách filter để lọc kết quả, thay vào đó dùng POST, ...
